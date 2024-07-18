@@ -474,8 +474,8 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
     guiManager(1);
 
-    if (!state._preferencesModalExists) {
-        state._preferencesModalExists = true;
+    if (!state._additionalInfoModalExists) {
+        state._additionalInfoModalExists = true;
 
         debug('CookieConsent [HTML] created', PREFERENCES_MODAL_NAME);
 
