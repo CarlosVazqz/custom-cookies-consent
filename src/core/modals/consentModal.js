@@ -264,10 +264,12 @@ export const createConsentModal = (api, createMainContainer) => {
 
         if (!dom._cmAcceptNecessaryBtn || !dom._cmAcceptAllBtn) {
             appendChild(dom._cmBtnGroup, dom._cmShowPreferencesBtn);
+            appendChild(dom._cmBtnGroup, dom._cmShowAdditionalInfoBtn);
             addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS + '--uneven');
         } else {
             addClassCm(dom._cmBtnGroup2, BTN_GROUP_CLASS);
             appendChild(dom._cmBtnGroup2, dom._cmShowPreferencesBtn);
+            appendChild(dom._cmBtnGroup2, dom._cmShowAdditionalInfoBtn);
             appendChild(dom._cmBtns, dom._cmBtnGroup2);
         }
     }
