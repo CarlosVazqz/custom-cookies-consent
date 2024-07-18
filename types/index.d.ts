@@ -375,9 +375,12 @@ declare namespace CookieConsent {
         sections: Section[]
     }
 
+    interface AdditionalInfoModalOptions extends PreferencesModalOptions {}
+
     interface Translation {
         consentModal: ConsentModalOptions
         preferencesModal: PreferencesModalOptions
+        additionalInfoModal: AdditionalInfoModalOptions
     }
 
     interface CookieConsentConfig {

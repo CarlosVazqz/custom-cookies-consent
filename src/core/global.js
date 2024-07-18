@@ -15,6 +15,7 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @typedef {CookieConsent.Translation} Translation
  * @typedef {CookieConsent.ConsentModalOptions} ConsentModalOptions
  * @typedef {CookieConsent.PreferencesModalOptions} PreferencesModalOptions
+ * @typedef {CookieConsent.AdditionalInfoModalOptions} AdditionalInfoModalOptions
  * @typedef {CookieConsent.CookieTable} CookieTable
  * @typedef {CookieConsent.Section} Section
  * @typedef {CookieConsent.CookieValue} CookieValue
@@ -92,11 +93,10 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
 
 export class GlobalState {
     constructor() {
-
-        /**
-         * Default config. options
-         * @type {CookieConsent.CookieConsentConfig}
-         */
+    /**
+     * Default config. options
+     * @type {CookieConsent.CookieConsentConfig}
+     */
         this._config = {
             mode: OPT_IN_MODE,
             revision: 0,
@@ -115,213 +115,213 @@ export class GlobalState {
                 expiresAfterDays: 182,
                 domain: '',
                 path: '/',
-                sameSite: 'Lax'
-            }
+                sameSite: 'Lax',
+            },
         };
 
         this._state = {
             /**
-            * @type {UserConfig}
-            */
+       * @type {UserConfig}
+       */
             _userConfig: {},
 
             _currentLanguageCode: '',
 
             /**
-            * @type {Object.<string, Translation>}
-            */
+       * @type {Object.<string, Translation>}
+       */
             _allTranslations: {},
 
             /**
-            * @type {Translation}
-            */
+       * @type {Translation}
+       */
             _currentTranslation: {},
 
             /**
-            * Internal state variables
-            * @type {CookieValue}
-            */
-            _savedCookieContent : {},
+       * Internal state variables
+       * @type {CookieValue}
+       */
+            _savedCookieContent: {},
 
             /**
-             * Store all event data-cc event listeners
-             * (so that they can be removed on .reset())
-             *
-             * @type {{
-             *  _element: HTMLElement,
-             *  _event: string,
-             *  _listener: Function
-             * }[]}
-             */
+       * Store all event data-cc event listeners
+       * (so that they can be removed on .reset())
+       *
+       * @type {{
+       *  _element: HTMLElement,
+       *  _event: string,
+       *  _listener: Function
+       * }[]}
+       */
             _dataEventListeners: [],
 
             _disablePageInteraction: false,
 
             /**
-            * @type {any}
-            */
-            _cookieData : null,
+       * @type {any}
+       */
+            _cookieData: null,
 
             /**
-            * @type {Date}
-            */
+       * @type {Date}
+       */
             _consentTimestamp: null,
 
             /**
-            * @type {Date}
-            */
+       * @type {Date}
+       */
             _lastConsentTimestamp: null,
 
             /**
-            * @type {string}
-            */
+       * @type {string}
+       */
             _consentId: '',
 
-            _invalidConsent : true,
+            _invalidConsent: true,
 
             //{{START: GUI}}
-            _consentModalExists : false,
-            _consentModalVisible : false,
+            _consentModalExists: false,
+            _consentModalVisible: false,
 
-            _preferencesModalVisible : false,
+            _preferencesModalVisible: false,
             _preferencesModalExists: false,
 
             /**
-            * @type {HTMLElement[]}
-            */
+       * @type {HTMLElement[]}
+       */
             _currentModalFocusableElements: [],
             //{{END: GUI}}
 
-            _revisionEnabled : false,
-            _validRevision : true,
+            _revisionEnabled: false,
+            _validRevision: true,
 
             /**
-            * Array containing the last changed categories (enabled/disabled)
-            * @type {string[]}
-            */
-            _lastChangedCategoryNames : [],
+       * Array containing the last changed categories (enabled/disabled)
+       * @type {string[]}
+       */
+            _lastChangedCategoryNames: [],
 
-            _reloadPage : false,
+            _reloadPage: false,
 
             /**
-            * @type {CookieConsent.AcceptType}
-            */
+       * @type {CookieConsent.AcceptType}
+       */
             _acceptType: '',
 
             /**
-            * Object containing all user's defined categories
-            * @type {Object.<string, Category>}
-            */
+       * Object containing all user's defined categories
+       * @type {Object.<string, Category>}
+       */
             _allDefinedCategories: false,
 
             /**
-            * Stores all available categories
-            * @type {string[]}
-            */
+       * Stores all available categories
+       * @type {string[]}
+       */
             _allCategoryNames: [],
 
             /**
-            * Contains all accepted categories
-            * @type {string[]}
-            */
-            _acceptedCategories : [],
+       * Contains all accepted categories
+       * @type {string[]}
+       */
+            _acceptedCategories: [],
 
             /**
-            * Keep track of readonly toggles
-            * @type {string[]}
-            */
-            _readOnlyCategories : [],
+       * Keep track of readonly toggles
+       * @type {string[]}
+       */
+            _readOnlyCategories: [],
 
             /**
-            * Contains all categories enabled by default
-            * @type {string[]}
-            */
-            _defaultEnabledCategories : [],
+       * Contains all categories enabled by default
+       * @type {string[]}
+       */
+            _defaultEnabledCategories: [],
 
             /**
-            * Don't run plugin if bot detected
-            * (to avoid indexing its text content)
-            */
-            _botAgentDetected : false,
+       * Don't run plugin if bot detected
+       * (to avoid indexing its text content)
+       */
+            _botAgentDetected: false,
 
             /**
-            * Save reference to the last focused element on the page
-            * (used later to restore focus when both modals are closed)
-            */
+       * Save reference to the last focused element on the page
+       * (used later to restore focus when both modals are closed)
+       */
 
             //{{START: GUI}}
 
-            /** @type {HTMLElement} **/_lastFocusedElemBeforeModal: false,
-            /** @type {HTMLElement} **/_lastFocusedModalElement: false,
+            /** @type {HTMLElement} **/ _lastFocusedElemBeforeModal: false,
+            /** @type {HTMLElement} **/ _lastFocusedModalElement: false,
 
             /**
-            * Both of the arrays below have the same structure:
-            * [0]: first focusable element inside modal
-            * [1]: last focusable element inside modal
-            */
+       * Both of the arrays below have the same structure:
+       * [0]: first focusable element inside modal
+       * [1]: last focusable element inside modal
+       */
 
-            /** @type {HTMLElement[]} **/ _cmFocusableElements : [],
-            /** @type {HTMLElement[]} **/ _pmFocusableElements : [],
+            /** @type {HTMLElement[]} **/ _cmFocusableElements: [],
+            /** @type {HTMLElement[]} **/ _pmFocusableElements: [],
 
             /**
-            * Keep track of enabled/disabled categories
-            * @type {boolean[]}
-            */
-            _allToggleStates : [],
+       * Keep track of enabled/disabled categories
+       * @type {boolean[]}
+       */
+            _allToggleStates: [],
 
             //{{END: GUI}}
 
             /**
-            * @type {Object.<string, Services>}
-            */
+       * @type {Object.<string, Services>}
+       */
             _allDefinedServices: {},
 
             /**
-            * @type {Object.<string, string[]>}
-            */
+       * @type {Object.<string, string[]>}
+       */
             _acceptedServices: {},
 
             /**
-             * Keep track of the current state of the services
-             * (may not be the same as enabledServices)
-             *
-             * @type {Object.<string, string[]>}
-             */
+       * Keep track of the current state of the services
+       * (may not be the same as enabledServices)
+       *
+       * @type {Object.<string, string[]>}
+       */
             _enabledServices: {},
 
             /**
-            * @type {Object.<string, string[]>}
-            */
+       * @type {Object.<string, string[]>}
+       */
             _lastChangedServices: {},
 
             /**
-            * @type {Object.<string, string[]>}
-            */
+       * @type {Object.<string, string[]>}
+       */
             _lastEnabledServices: {},
 
             /**
-            * @type {ScriptInfo[]}
-            */
-            _allScriptTags: []
+       * @type {ScriptInfo[]}
+       */
+            _allScriptTags: [],
         };
 
         //{{START: GUI}}
 
         /**
-         * Pointers to main dom elements
-         * @type {DomElements}
-         */
+     * Pointers to main dom elements
+     * @type {DomElements}
+     */
         this._dom = {
             _categoryCheckboxInputs: {},
-            _serviceCheckboxInputs: {}
+            _serviceCheckboxInputs: {},
         };
 
         //{{END: GUI}}
 
         /**
-         * Callback functions
-         * @type {CustomCallbacks}
-         */
+     * Callback functions
+     * @type {CustomCallbacks}
+     */
         this._callbacks = {};
 
         this._customEvents = {
@@ -331,7 +331,7 @@ export class GlobalState {
             //{{START: GUI}}
             _onModalShow: 'cc:onModalShow',
             _onModalHide: 'cc:onModalHide',
-            _onModalReady: 'cc:onModalReady'
+            _onModalReady: 'cc:onModalReady',
             //{{END: GUI}}
         };
     }

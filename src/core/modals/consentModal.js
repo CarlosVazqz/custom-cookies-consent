@@ -27,6 +27,7 @@ import {
 
 import { guiManager } from '../../utils/gui-manager';
 import { createPreferencesModal } from './preferencesModal';
+import { createAdditionalInfoModal } from './additionalInfoModal';
 
 /**
  * @callback CreateMainContainer
@@ -237,7 +238,7 @@ export const createConsentModal = (api, createMainContainer) => {
 
             addEvent(dom._cmShowAdditionalInfoBtn, 'mouseenter', () => {
                 if (!state._preferencesModalExists)
-                    createPreferencesModal(api, createMainContainer);
+                    createAdditionalInfoModal(api, createMainContainer);
             });
             addEvent(dom._cmShowAdditionalInfoBtn, CLICK_EVENT, showPreferences);
         }
