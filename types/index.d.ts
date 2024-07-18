@@ -575,6 +575,11 @@ declare namespace CookieConsent {
     function hidePreferences(): void
 
     /**
+     * Hide the additionalInfoModal.
+     */
+    function hideAdditionalInfo(): void
+
+    /**
      * Accept/Reject categories.
      * @param categories Categories to accept
      * @param excludedCategories Categories to exclude

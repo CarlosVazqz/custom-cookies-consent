@@ -43,14 +43,14 @@ import {
 export const createAdditionalInfoModal = (api, createMainContainer) => {
     const state = globalObj._state;
     const dom = globalObj._dom;
-    const { hide, hidePreferences, acceptCategory } = api;
+    const { hide, hideAdditionalInfo, acceptCategory } = api;
 
     /**
    * @param {string|string[]} [categories]
    */
     const acceptHelper = (categories) => {
         acceptCategory(categories);
-        hidePreferences();
+        hideAdditionalInfo();
         hide();
     };
 
@@ -82,7 +82,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         /**
      * Hide modal when overlay is clicked
      */
-        addEvent(pmOverlay, CLICK_EVENT, hidePreferences);
+        addEvent(pmOverlay, CLICK_EVENT, hideAdditionalInfo);
 
         // Preferences modal
         dom._pm = createNode(DIV_TAG);
@@ -98,7 +98,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
             dom._htmlDom,
             'keydown',
             (event) => {
-                if (event.keyCode === 27) hidePreferences();
+                if (event.keyCode === 27) hideAdditionalInfo();
             },
             true
         );
@@ -113,7 +113,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._pmCloseBtn = createNode(BUTTON_TAG);
         addClassPm(dom._pmCloseBtn, 'close-btn');
         setAttribute(dom._pmCloseBtn, 'aria-label', modalData.closeIconLabel || '');
-        addEvent(dom._pmCloseBtn, CLICK_EVENT, hidePreferences);
+        addEvent(dom._pmCloseBtn, CLICK_EVENT, hideAdditionalInfo);
 
         dom._pmFocusSpan = createNode('span');
         dom._pmFocusSpan.innerHTML = getSvgIcon();
@@ -429,29 +429,29 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         appendChild(currentBody, sectionToggleContainer || s);
     });
 
-    // if (acceptAllBtnData) {
-    //     if (!dom._pmAcceptAllBtn) {
-    //         dom._pmAcceptAllBtn = createNode(BUTTON_TAG);
-    //         addClassPm(dom._pmAcceptAllBtn, 'btn');
-    //         setAttribute(dom._pmAcceptAllBtn, DATA_ROLE, 'all');
-    //         appendChild(_pmBtnGroup1, dom._pmAcceptAllBtn);
-    //         addEvent(dom._pmAcceptAllBtn, CLICK_EVENT, () => acceptHelper('all'));
-    //     }
+    if (acceptAllBtnData) {
+        if (!dom._pmAcceptAllBtn) {
+            dom._pmAcceptAllBtn = createNode(BUTTON_TAG);
+            addClassPm(dom._pmAcceptAllBtn, 'btn');
+            setAttribute(dom._pmAcceptAllBtn, DATA_ROLE, 'all');
+            appendChild(_pmBtnGroup1, dom._pmAcceptAllBtn);
+            addEvent(dom._pmAcceptAllBtn, CLICK_EVENT, () => acceptHelper('all'));
+        }
 
-    //     dom._pmAcceptAllBtn.innerHTML = acceptAllBtnData;
-    // }
+        dom._pmAcceptAllBtn.innerHTML = acceptAllBtnData;
+    }
 
-    // if (acceptNecessaryBtnData) {
-    //     if (!dom._pmAcceptNecessaryBtn) {
-    //         dom._pmAcceptNecessaryBtn = createNode(BUTTON_TAG);
-    //         addClassPm(dom._pmAcceptNecessaryBtn, 'btn');
-    //         setAttribute(dom._pmAcceptNecessaryBtn, DATA_ROLE, 'necessary');
-    //         appendChild(_pmBtnGroup1, dom._pmAcceptNecessaryBtn);
-    //         addEvent(dom._pmAcceptNecessaryBtn, CLICK_EVENT, () => acceptHelper([]));
-    //     }
+    if (acceptNecessaryBtnData) {
+        if (!dom._pmAcceptNecessaryBtn) {
+            dom._pmAcceptNecessaryBtn = createNode(BUTTON_TAG);
+            addClassPm(dom._pmAcceptNecessaryBtn, 'btn');
+            setAttribute(dom._pmAcceptNecessaryBtn, DATA_ROLE, 'necessary');
+            appendChild(_pmBtnGroup1, dom._pmAcceptNecessaryBtn);
+            addEvent(dom._pmAcceptNecessaryBtn, CLICK_EVENT, () => acceptHelper([]));
+        }
 
-    //     dom._pmAcceptNecessaryBtn.innerHTML = acceptNecessaryBtnData;
-    // }
+        dom._pmAcceptNecessaryBtn.innerHTML = acceptNecessaryBtnData;
+    }
 
     if (savePreferencesBtnData) {
         if (!dom._pmSavePreferencesBtn) {
