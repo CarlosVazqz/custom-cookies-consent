@@ -152,6 +152,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
     guiManager(2);
 
+    state._additionalInfoModalExists = false;
     if (!state._additionalInfoModalExists) {
         state._additionalInfoModalExists = true;
 
