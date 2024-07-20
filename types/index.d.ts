@@ -375,7 +375,11 @@ declare namespace CookieConsent {
         sections: Section[]
     }
 
-    interface AdditionalInfoModalOptions extends PreferencesModalOptions {}
+    interface AdditionalInfoModalOptions {
+        title?: string
+        description?: string
+        closeBtn?: string
+    }
 
     interface Translation {
         consentModal: ConsentModalOptions

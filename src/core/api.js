@@ -285,43 +285,6 @@ export const showPreferences = () => {
 };
 
 /**
- * Show preferences modal
- */
-export const showAdditionalInfo = () => {
-    const state = globalObj._state;
-
-    if (state._additionalInfoModalVisible) return;
-
-    if (!state._additionalInfoModalExists)
-        createAdditionalInfoModal(miniAPI, createMainContainer);
-
-    state._additionalInfoModalVisible = true;
-
-    // If there is no consent-modal, keep track of the last focused elem.
-    if (!state._consentModalVisible) {
-        state._lastFocusedElemBeforeModal = getActiveElement();
-    } else {
-        state._lastFocusedModalElement = getActiveElement();
-    }
-
-    focusAfterTransition(globalObj._dom._pm, 2);
-
-    addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
-    setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'false');
-
-    /**
-   * Set focus to preferencesModal
-   */
-    setTimeout(() => {
-        focus(globalObj._dom._pmDivTabindex);
-    }, 100);
-
-    debug('CookieConsent [TOGGLE]: show preferencesModal');
-
-    fireEvent(globalObj._customEvents._onModalShow, PREFERENCES_MODAL_NAME);
-};
-
-/**
  * https://github.com/orestbida/cookieconsent/issues/481
  */
 const discardUnsavedPreferences = () => {
@@ -394,52 +357,11 @@ export const hidePreferences = () => {
     fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
 };
 
-/**
- * Hide additionalInfo modal
- */
-export const hideAdditionalInfo = () => {
-    const state = globalObj._state;
-
-    if (!state._additionalInfoModalVisible) return;
-
-    state._additionalInfoModalVisible = false;
-
-    discardUnsavedPreferences();
-
-    /**
-   * Fix focus restoration to body with Chrome
-   */
-    focus(globalObj._dom._pmFocusSpan, true);
-
-    removeClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
-    setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
-
-    /**
-   * If consent modal is visible, focus him (instead of page document)
-   */
-    if (state._consentModalVisible) {
-        focus(state._lastFocusedModalElement);
-        state._lastFocusedModalElement = null;
-    } else {
-    /**
-     * Restore focus to last page element which had focus before modal opening
-     */
-        focus(state._lastFocusedElemBeforeModal);
-        state._lastFocusedElemBeforeModal = null;
-    }
-
-    debug('CookieConsent [TOGGLE]: hide preferencesModal');
-
-    fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
-};
-
 var miniAPI = {
     show,
     hide,
     showPreferences,
-    showAdditionalInfo,
     hidePreferences,
-    hideAdditionalInfo,
     acceptCategory,
 };
 
