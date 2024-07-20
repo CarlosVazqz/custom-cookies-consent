@@ -56,10 +56,10 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         descriptionData = modalData.description,
         closeBtnData = modalData.closeBtn;
 
-    console.info('state', state);
-    console.info('dom', dom);
-    console.info('modalData', modalData);
-    console.info('titleData', titleData);
-    console.info('descriptionData', descriptionData);
-    console.info('closeBtnData', closeBtnData);
+    debug('state', state);
+    debug('dom', dom);
+    debug('modalData', modalData);
+    debug('titleData', titleData);
+    debug('descriptionData', descriptionData);
+    debug('closeBtnData', closeBtnData);
 };
