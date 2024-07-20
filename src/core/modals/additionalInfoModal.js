@@ -70,6 +70,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._aim = createNode(DIV_TAG);
         addClass(dom._aim, 'aim');
         setAttribute(dom._aim, 'role', 'dialog');
+        setAttribute(dom._pm, ARIA_HIDDEN, true);
         setAttribute(dom._aim, 'aria-modal', true);
         setAttribute(dom._aim, 'aria-labelledby', 'aim__title');
 
@@ -140,7 +141,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._aimFooterCloseBtn.innerHTML = closeBtnData;
     }
 
-    guiManager(2);
+    //   guiManager(2);
 
     if (!state._additionalInfoModalExists) {
         state._additionalInfoModalExists = true;
