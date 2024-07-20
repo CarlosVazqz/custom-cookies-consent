@@ -120,6 +120,9 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         closeBtnData && appendChild(dom._aim, dom._aimFooter);
 
         appendChild(dom._aimContainer, dom._aim);
+    } else {
+        dom._aimNewBody = createNode(DIV_TAG);
+        addClass(dom._aimNewBody, 'body');
     }
 
     if (titleData) {
@@ -141,7 +144,12 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._aimFooterCloseBtn.innerHTML = closeBtnData;
     }
 
-    //   guiManager(2);
+    if (dom._aimNewBody) {
+        dom._aim.replaceChild(dom._aimNewBody, dom._aimBody);
+        dom._aimBody = dom._aimNewBody;
+    }
+
+    guiManager(2);
 
     if (!state._additionalInfoModalExists) {
         state._additionalInfoModalExists = true;

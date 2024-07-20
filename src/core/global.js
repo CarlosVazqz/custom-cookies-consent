@@ -76,6 +76,8 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @property {HTMLElement} _aimBody
  * @property {HTMLElement} _aimFooter
  * @property {HTMLElement} _aimFooterCloseBtn
+ * @property {HTMLElement} _aimDivTabindex
+ * @property {HTMLElement} _aimNewBody
  *
  * @property {Object.<string, HTMLInputElement>} _categoryCheckboxInputs
  * @property {Object.<string, ServiceToggle>} _serviceCheckboxInputs
