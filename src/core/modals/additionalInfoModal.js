@@ -56,13 +56,6 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         descriptionData = modalData.description,
         closeBtnData = modalData.closeBtn;
 
-    debug('state', state);
-    debug('dom', dom);
-    debug('modalData', modalData);
-    debug('titleData', titleData);
-    debug('descriptionData', descriptionData);
-    debug('closeBtnData', closeBtnData);
-
     if (!dom._aimContainer) {
     // Create general modal container
         dom._aimContainer = createNode(DIV_TAG);
@@ -129,19 +122,19 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
     }
 
     if (titleData) {
-        dom._aimTitle.innerHTML = titleData.text;
+        dom._aimTitle.innerHTML = titleData;
         closeBtnData && setAttribute(dom._aimCloseBtn, 'aria-label', closeBtnData);
     }
 
     if (descriptionData) {
-        dom._aimBody.innerHTML = descriptionData.text;
+        dom._aimBody.innerHTML = descriptionData;
     }
 
     if (closeBtnData) {
         if (!dom._aimFooterCloseBtn) {
             dom._aimFooterCloseBtn = createNode(BUTTON_TAG);
             addClass(dom._aimFooterCloseBtn, 'btn');
-            appendChild(dom._aimBtnGroup, dom._aimFooterCloseBtn);
+            appendChild(_aimBtnGroup, dom._aimFooterCloseBtn);
         }
 
         dom._aimFooterCloseBtn.innerHTML = closeBtnData;
