@@ -152,6 +152,6 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         /**
      * Enable transition
      */
-        setTimeout(() => addClass(dom._pmContainer, 'cc--anim'), 100);
+        setTimeout(() => addClass(dom._aimContainer, 'cc--anim'), 100);
     }
 };
