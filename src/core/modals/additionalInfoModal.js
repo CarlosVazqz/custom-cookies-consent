@@ -70,7 +70,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._aim = createNode(DIV_TAG);
         addClass(dom._aim, 'aim');
         setAttribute(dom._aim, 'role', 'dialog');
-        setAttribute(dom._pm, ARIA_HIDDEN, true);
+        // setAttribute(dom._pm, ARIA_HIDDEN, true);
         setAttribute(dom._aim, 'aria-modal', true);
         setAttribute(dom._aim, 'aria-labelledby', 'aim__title');
 
@@ -158,11 +158,11 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
         createMainContainer();
         appendChild(dom._ccMain, dom._aimContainer);
-        // handleFocusTrap(dom._aim);
+        handleFocusTrap(dom._aim);
 
         /**
      * Enable transition
      */
-        setTimeout(() => addClass(dom._pmContainer, 'cc--anim'), 100);
+        setTimeout(() => addClass(dom._aimContainer, 'cc--anim'), 100);
     }
 };
