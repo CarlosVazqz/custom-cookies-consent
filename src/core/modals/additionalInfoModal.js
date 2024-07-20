@@ -62,4 +62,103 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
     debug('titleData', titleData);
     debug('descriptionData', descriptionData);
     debug('closeBtnData', closeBtnData);
+
+    if (!dom._aimContainer) {
+    // Create general modal container
+        dom._aimContainer = createNode(DIV_TAG);
+        addClass(dom._aimContainer, 'aim-wrapper');
+
+        // Create overlay
+        const aimOverlay = createNode(DIV_TAG);
+        addClass(aimOverlay, 'aim-overlay');
+        appendChild(dom._aimContainer, aimOverlay);
+
+        // Create modal
+        dom._aim = createNode(DIV_TAG);
+        addClass(dom._aim, 'aim');
+        setAttribute(dom._aim, 'role', 'dialog');
+        setAttribute(dom._aim, 'aria-modal', true);
+        setAttribute(dom._aim, 'aria-labelledby', 'aim__title');
+
+        // Create modal header
+        dom._aimHeader = createNode(DIV_TAG);
+        addClass(dom._aimHeader, 'header');
+
+        // Create modal title
+        dom._aimTitle = createNode('h2');
+        addClass(dom._aimTitle, 'title');
+        dom._aimTitle.id = 'aim__title';
+
+        // Create close button in modal header
+        dom._aimCloseBtn = createNode(BUTTON_TAG);
+        addClass(dom._aimCloseBtn, 'close-btn');
+        setAttribute(dom._aimCloseBtn, 'aria-label', closeBtnData.ariaLabel || '');
+
+        // Create close button icon
+        dom._aimFocusSpan = createNode('span');
+        dom._aimFocusSpan.innerHTML = getSvgIcon();
+        appendChild(dom._aimCloseBtn, dom._aimFocusSpan);
+
+        // Create modal content
+        dom._aimBody = createNode(DIV_TAG);
+        addClass(dom._aimBody, 'body');
+
+        dom._aimFooter = createNode(DIV_TAG);
+        addClass(dom._aimFooter, 'footer');
+
+        // var _aimBtnContainer = createNode(DIV_TAG);
+        // addClass(_aimBtnContainer, "btns");
+
+        var _aimBtnGroup = createNode(DIV_TAG);
+        addClass(_aimBtnGroup, BTN_GROUP_CLASS);
+
+        appendChild(dom._aimFooter, _aimBtnGroup);
+        appendChild(dom._aimHeader, dom._aimTitle);
+        appendChild(dom._aimHeader, dom._aimCloseBtn);
+
+        dom._aimDivTabindex = createNode(DIV_TAG);
+        setAttribute(dom._aimDivTabindex, 'tabindex', -1);
+        appendChild(dom._aim, dom._aimDivTabindex);
+
+        appendChild(dom._aim, dom._aimHeader);
+        appendChild(dom._aim, dom._aimBody);
+
+        closeBtnData && appendChild(dom._aim, dom._aimFooter);
+
+        appendChild(dom._aimContainer, dom._aim);
+    }
+
+    if (titleData) {
+        dom._aimTitle.innerHTML = titleData.text;
+        closeBtnData && setAttribute(dom._aimCloseBtn, 'aria-label', closeBtnData);
+    }
+
+    if (descriptionData) {
+        dom._aimBody.innerHTML = descriptionData.text;
+    }
+
+    if (closeBtnData) {
+        if (!dom._aimFooterCloseBtn) {
+            dom._aimFooterCloseBtn = createNode(BUTTON_TAG);
+            addClass(dom._aimFooterCloseBtn, 'btn');
+            appendChild(dom._aimBtnGroup, dom._aimFooterCloseBtn);
+        }
+
+        dom._aimFooterCloseBtn.innerHTML = closeBtnData;
+    }
+
+    guiManager(2);
+
+    if (!state._additionalInfoModalExists) {
+        state._additionalInfoModalExists = true;
+
+        createMainContainer();
+        appendChild(dom._ccMain, dom._aimContainer);
+        // handleFocusTrap(dom._aim);
+
+        /**
+     * Enable transition
+     */
+        setTimeout(() => addClass(dom._pmContainer, 'cc--anim'), 100);
+    }
 };

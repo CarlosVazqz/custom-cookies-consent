@@ -41,6 +41,7 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @property {HTMLElement} _ccMain
  * @property {HTMLElement} _cmContainer
  * @property {HTMLElement} _pmContainer
+ * @property {HTMLElement} _aimContainer
  *
  * @property {HTMLElement} _cm
  * @property {HTMLElement} _cmBody
@@ -67,6 +68,14 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @property {HTMLElement} _pmAcceptAllBtn
  * @property {HTMLElement} _pmAcceptNecessaryBtn
  * @property {HTMLElement} _pmSavePreferencesBtn
+ *
+ * @property {HTMLElement} _aimHeader
+ * @property {HTMLElement} _aimTitle
+ * @property {HTMLElement} _aimCloseBtn
+ * @property {HTMLElement} _aimFocusSpan
+ * @property {HTMLElement} _aimBody
+ * @property {HTMLElement} _aimFooter
+ * @property {HTMLElement} _aimFooterCloseBtn
  *
  * @property {Object.<string, HTMLInputElement>} _categoryCheckboxInputs
  * @property {Object.<string, ServiceToggle>} _serviceCheckboxInputs

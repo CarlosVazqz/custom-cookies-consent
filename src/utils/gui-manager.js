@@ -24,20 +24,21 @@ const CLASS_CONSTANTS = {
     _inline: 'inline',
     _wide: 'wide',
     _pmPrefix: 'pm--',
+    _aimPrefix: 'aim--',
     _cmPrefix: 'cm--',
-    _box: 'box'
+    _box: 'box',
 };
 
 const alignV = [
     CLASS_CONSTANTS._middle,
     CLASS_CONSTANTS._top,
-    CLASS_CONSTANTS._bottom
+    CLASS_CONSTANTS._bottom,
 ];
 
 const alignH = [
     CLASS_CONSTANTS._left,
     CLASS_CONSTANTS._center,
-    CLASS_CONSTANTS._right
+    CLASS_CONSTANTS._right,
 ];
 
 const ALL_CM_LAYOUTS = {
@@ -46,22 +47,22 @@ const ALL_CM_LAYOUTS = {
         _alignV: alignV,
         _alignH: alignH,
         _defaultAlignV: CLASS_CONSTANTS._bottom,
-        _defaultAlignH: CLASS_CONSTANTS._right
+        _defaultAlignH: CLASS_CONSTANTS._right,
     },
     cloud: {
         _variants: [CLASS_CONSTANTS._inline],
         _alignV: alignV,
         _alignH: alignH,
         _defaultAlignV: CLASS_CONSTANTS._bottom,
-        _defaultAlignH: CLASS_CONSTANTS._center
+        _defaultAlignH: CLASS_CONSTANTS._center,
     },
     bar: {
         _variants: [CLASS_CONSTANTS._inline],
-        _alignV: alignV.slice(1),   //remove the first "middle" option
+        _alignV: alignV.slice(1), //remove the first "middle" option
         _alignH: [],
         _defaultAlignV: CLASS_CONSTANTS._bottom,
-        _defaultAlignH: ''
-    }
+        _defaultAlignH: '',
+    },
 };
 
 const ALL_PM_LAYOUTS = {
@@ -70,15 +71,15 @@ const ALL_PM_LAYOUTS = {
         _alignV: [],
         _alignH: [],
         _defaultAlignV: '',
-        _defaultAlignH: ''
+        _defaultAlignH: '',
     },
     bar: {
         _variants: [CLASS_CONSTANTS._wide],
         _alignV: [],
         _alignH: [CLASS_CONSTANTS._left, CLASS_CONSTANTS._right],
         _defaultAlignV: '',
-        _defaultAlignH: CLASS_CONSTANTS._left
-    }
+        _defaultAlignH: CLASS_CONSTANTS._left,
+    },
 };
 
 /**
@@ -89,6 +90,8 @@ export const guiManager = (applyToModal) => {
     const guiOptions = globalObj._state._userConfig.guiOptions;
     const consentModalOptions = guiOptions && guiOptions.consentModal;
     const preferencesModalOptions = guiOptions && guiOptions.preferencesModal;
+    const additionalInfoModalOptions =
+    guiOptions && guiOptions.additionalInfoModal;
 
     if (applyToModal === 0) {
         setLayout(
@@ -111,6 +114,17 @@ export const guiManager = (applyToModal) => {
             'pm'
         );
     }
+
+    if (applyToModal === 2) {
+        setLayout(
+            globalObj._dom._aim,
+            ALL_PM_LAYOUTS,
+            additionalInfoModalOptions,
+            CLASS_CONSTANTS._aimPrefix,
+            CLASS_CONSTANTS._box,
+            'aim'
+        );
+    }
 };
 
 /**
@@ -122,33 +136,42 @@ export const guiManager = (applyToModal) => {
  * @param {string} defaultLayoutName
  * @param {'cm' | 'pm'} modalClassName
  */
-const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, defaultLayoutName, modalClassName) => {
+const setLayout = (
+    modal,
+    allowedLayoutsObj,
+    userGuiOptions,
+    modalClassPrefix,
+    defaultLayoutName,
+    modalClassName
+) => {
     /**
-     * Reset modal classes to default
-     */
+   * Reset modal classes to default
+   */
     modal.className = modalClassName;
 
     const layout = userGuiOptions && userGuiOptions.layout;
     const position = userGuiOptions && userGuiOptions.position;
     const flipButtons = userGuiOptions && userGuiOptions.flipButtons;
-    const equalWeightButtons = !userGuiOptions || userGuiOptions.equalWeightButtons !== false;
+    const equalWeightButtons =
+    !userGuiOptions || userGuiOptions.equalWeightButtons !== false;
 
-    const layoutSplit = layout && layout.split(' ') || [];
+    const layoutSplit = (layout && layout.split(' ')) || [];
 
     const layoutName = layoutSplit[0];
     const layoutVariant = layoutSplit[1];
 
-    const currentLayoutName = layoutName in allowedLayoutsObj
-        ? layoutName
-        : defaultLayoutName;
+    const currentLayoutName =
+    layoutName in allowedLayoutsObj ? layoutName : defaultLayoutName;
 
     const currentLayout = allowedLayoutsObj[currentLayoutName];
-    const currentLayoutVariant = elContains(currentLayout._variants, layoutVariant) && layoutVariant;
+    const currentLayoutVariant =
+    elContains(currentLayout._variants, layoutVariant) && layoutVariant;
 
-    const positionSplit = position && position.split(' ') || [];
+    const positionSplit = (position && position.split(' ')) || [];
     const positionV = positionSplit[0];
 
-    const positionH = modalClassPrefix === CLASS_CONSTANTS._pmPrefix
+    const positionH =
+    modalClassPrefix === CLASS_CONSTANTS._pmPrefix
         ? positionSplit[0]
         : positionSplit[1];
 
@@ -160,7 +183,7 @@ const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, d
         ? positionH
         : currentLayout._defaultAlignH;
 
-    const addModalClass = className => {
+    const addModalClass = (className) => {
         className && addClass(modal, modalClassPrefix + className);
     };
 
@@ -175,10 +198,10 @@ const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, d
     const btnClass = btnClassPrefix + secondaryBtnClass;
 
     /**
-     * Add classes to buttons
-     */
+   * Add classes to buttons
+   */
     if (modalClassName === 'cm') {
-        const {_cmAcceptNecessaryBtn, _cmCloseIconBtn} = globalObj._dom;
+        const { _cmAcceptNecessaryBtn, _cmCloseIconBtn } = globalObj._dom;
 
         if (_cmAcceptNecessaryBtn) {
             equalWeightButtons
@@ -192,7 +215,7 @@ const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, d
                 : addClass(_cmCloseIconBtn, btnClass);
         }
     } else {
-        const { _pmAcceptNecessaryBtn } =  globalObj._dom;
+        const { _pmAcceptNecessaryBtn } = globalObj._dom;
 
         if (_pmAcceptNecessaryBtn) {
             equalWeightButtons
