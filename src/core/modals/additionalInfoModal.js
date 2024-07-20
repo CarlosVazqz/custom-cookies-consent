@@ -73,10 +73,10 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
     if (!dom._pmContainer) {
         dom._pmContainer = createNode(DIV_TAG);
-        addClass(dom._pmContainer, 'pm-wrapper');
+        addClass(dom._pmContainer, 'aim-wrapper');
 
         const pmOverlay = createNode('div');
-        addClass(pmOverlay, 'pm-overlay');
+        addClass(pmOverlay, 'aim-overlay');
         appendChild(dom._pmContainer, pmOverlay);
 
         /**
@@ -87,11 +87,11 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         // Preferences modal
         dom._pm = createNode(DIV_TAG);
 
-        addClass(dom._pm, 'pm');
+        addClass(dom._pm, 'aim');
         setAttribute(dom._pm, 'role', 'dialog');
         setAttribute(dom._pm, ARIA_HIDDEN, true);
         setAttribute(dom._pm, 'aria-modal', true);
-        setAttribute(dom._pm, 'aria-labelledby', 'pm__title');
+        setAttribute(dom._pm, 'aria-labelledby', 'aim__title');
 
         // Hide preferences on 'esc' key press
         addEvent(
