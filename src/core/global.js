@@ -69,6 +69,7 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @property {HTMLElement} _pmAcceptNecessaryBtn
  * @property {HTMLElement} _pmSavePreferencesBtn
  *
+ * @property {HTMLElement} _aim
  * @property {HTMLElement} _aimHeader
  * @property {HTMLElement} _aimTitle
  * @property {HTMLElement} _aimCloseBtn
