@@ -126,6 +126,12 @@ export const addClassCm = (elem, className) =>
  */
 export const addClassPm = (elem, className) =>
     addClass(elem, 'pm__' + className);
+/**
+ * @param {HTMLElement} elem
+ * @param {string} className
+ */
+export const addClassAim = (elem, className) =>
+    addClass(elem, 'aim__' + className);
 
 /**
  * @param {HTMLElement} elem

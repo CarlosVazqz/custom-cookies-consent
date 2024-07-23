@@ -3,6 +3,7 @@ import {
     createNode,
     addClass,
     addClassPm,
+    addClassAim,
     setAttribute,
     removeClass,
     addEvent,
@@ -76,16 +77,16 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
         // Create modal header
         dom._aimHeader = createNode(DIV_TAG);
-        addClass(dom._aimHeader, 'header');
+        addClassAim(dom._aimHeader, 'header');
 
         // Create modal title
         dom._aimTitle = createNode('h2');
-        addClass(dom._aimTitle, 'title');
+        addClassAim(dom._aimTitle, 'title');
         dom._aimTitle.id = 'aim__title';
 
         // Create close button in modal header
         dom._aimCloseBtn = createNode(BUTTON_TAG);
-        addClass(dom._aimCloseBtn, 'close-btn');
+        addClassAim(dom._aimCloseBtn, 'close-btn');
         setAttribute(dom._aimCloseBtn, 'aria-label', closeBtnData.ariaLabel || '');
 
         // Create close button icon
@@ -95,16 +96,16 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
         // Create modal content
         dom._aimBody = createNode(DIV_TAG);
-        addClass(dom._aimBody, 'body');
+        addClassAim(dom._aimBody, 'body');
 
         dom._aimFooter = createNode(DIV_TAG);
-        addClass(dom._aimFooter, 'footer');
+        addClassAim(dom._aimFooter, 'footer');
 
         // var _aimBtnContainer = createNode(DIV_TAG);
         // addClass(_aimBtnContainer, "btns");
 
         var _aimBtnGroup = createNode(DIV_TAG);
-        addClass(_aimBtnGroup, BTN_GROUP_CLASS);
+        addClassAim(_aimBtnGroup, BTN_GROUP_CLASS);
 
         appendChild(dom._aimFooter, _aimBtnGroup);
         appendChild(dom._aimHeader, dom._aimTitle);
@@ -138,7 +139,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
     if (closeBtnData) {
         if (!dom._aimFooterCloseBtn) {
             dom._aimFooterCloseBtn = createNode(BUTTON_TAG);
-            addClass(dom._aimFooterCloseBtn, 'btn');
+            addClassAim(dom._aimFooterCloseBtn, 'btn');
             appendChild(_aimBtnGroup, dom._aimFooterCloseBtn);
         }
 
