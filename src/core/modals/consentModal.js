@@ -237,7 +237,7 @@ export const createConsentModal = (api, createMainContainer) => {
             setAttribute(dom._cmShowAdditionalInfoBtn, DATA_ROLE, 'show');
 
             addEvent(dom._cmShowAdditionalInfoBtn, 'mouseenter', () => {
-                if (!state._preferencesModalExists)
+                if (!state._additionalInfoModalExists)
                     createAdditionalInfoModal(api, createMainContainer);
             });
             // addEvent(dom._cmShowAdditionalInfoBtn, CLICK_EVENT, showAdditionalInfo);

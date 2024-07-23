@@ -82,6 +82,23 @@ const ALL_PM_LAYOUTS = {
     },
 };
 
+const ALL_AIM_LAYOUTS = {
+    box: {
+        _variants: [],
+        _alignV: [],
+        _alignH: [],
+        _defaultAlignV: '',
+        _defaultAlignH: '',
+    },
+    bar: {
+        _variants: [CLASS_CONSTANTS._wide],
+        _alignV: [],
+        _alignH: [CLASS_CONSTANTS._left, CLASS_CONSTANTS._right],
+        _defaultAlignV: '',
+        _defaultAlignH: CLASS_CONSTANTS._left,
+    },
+};
+
 /**
  * Add appropriate classes to modals and buttons
  * @param {0 | 1} applyToModal
@@ -118,7 +135,7 @@ export const guiManager = (applyToModal) => {
     if (applyToModal === 2) {
         setLayout(
             globalObj._dom._aim,
-            ALL_PM_LAYOUTS,
+            ALL_AIM_LAYOUTS,
             additionalInfoModalOptions,
             CLASS_CONSTANTS._aimPrefix,
             CLASS_CONSTANTS._box,
