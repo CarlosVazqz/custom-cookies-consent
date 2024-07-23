@@ -66,6 +66,7 @@ import {
     TOGGLE_CONSENT_MODAL_CLASS,
     TOGGLE_DISABLE_INTERACTION_CLASS,
     TOGGLE_PREFERENCES_MODAL_CLASS,
+    TOGGLE_ADDITIONAL_INFO_MODAL_CLASS,
     OPT_OUT_MODE,
     CONSENT_MODAL_NAME,
     ARIA_HIDDEN,
@@ -285,6 +286,41 @@ export const showPreferences = () => {
 };
 
 /**
+ * Show additoinal info modal
+ */
+export const showAdditionalInfo = () => {
+    const state = globalObj._state;
+
+    if (state._additionalInfoModalVisible) return;
+
+    if (!state._additionalInfoModalExists)
+        createAdditionalInfoModal(miniAPI, createMainContainer);
+
+    state._additionalInfoModalVisible = true;
+
+    // If there is no consent-modal, keep track of the last focused elem.
+    if (!state._consentModalVisible) {
+        state._lastFocusedElemBeforeModal = getActiveElement();
+    } else {
+        state._lastFocusedModalElement = getActiveElement();
+    }
+
+    focusAfterTransition(globalObj._dom._aim, 3);
+
+    addClass(globalObj._dom._htmlDom, TOGGLE_ADDITIONAL_INFO_MODAL_CLASS);
+    setAttribute(globalObj._dom._aim, ARIA_HIDDEN, 'false');
+
+    /**
+   * Set focus to additionalInfoModal
+   */
+    setTimeout(() => {
+        focus(globalObj._dom._aimDivTabindex);
+    }, 100);
+
+    debug('CookieConsent [TOGGLE]: show additionalInfoModal');
+};
+
+/**
  * https://github.com/orestbida/cookieconsent/issues/481
  */
 const discardUnsavedPreferences = () => {
@@ -361,6 +397,7 @@ var miniAPI = {
     show,
     hide,
     showPreferences,
+    showAdditionalInfo,
     hidePreferences,
     acceptCategory,
 };

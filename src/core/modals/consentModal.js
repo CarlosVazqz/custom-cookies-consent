@@ -52,7 +52,7 @@ const createFocusSpan = () => {
 export const createConsentModal = (api, createMainContainer) => {
     const state = globalObj._state;
     const dom = globalObj._dom;
-    const { hide, showPreferences, acceptCategory } = api;
+    const { hide, showPreferences, showAdditionalInfo, acceptCategory } = api;
 
     /**
    * @type {import("../global").ConsentModalOptions}
@@ -240,7 +240,7 @@ export const createConsentModal = (api, createMainContainer) => {
                 if (!state._additionalInfoModalExists)
                     createAdditionalInfoModal(api, createMainContainer);
             });
-            // addEvent(dom._cmShowAdditionalInfoBtn, CLICK_EVENT, showAdditionalInfo);
+            addEvent(dom._cmShowAdditionalInfoBtn, CLICK_EVENT, showAdditionalInfo);
         }
 
         dom._cmShowAdditionalInfoBtn.firstElementChild.innerHTML =

@@ -757,7 +757,9 @@ export const focusAfterTransition = (element, modalId) => {
     const getVisibleDiv = (modalId) =>
         modalId === 1
             ? globalObj._dom._cmDivTabindex
-            : globalObj._dom._pmDivTabindex;
+            : modalId === 2
+                ? globalObj._dom._pmDivTabindex
+                : globalObj._dom._aimDivTabindex;
 
     const setFocus = (event) => {
         event.target.removeEventListener('transitionend', setFocus);
