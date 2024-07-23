@@ -393,12 +393,48 @@ export const hidePreferences = () => {
     fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
 };
 
+/**
+ * Hide additional info modal
+ */
+export const hideAdditionalInfo = () => {
+    const state = globalObj._state;
+
+    if (!state._additionalInfoModalVisible) return;
+
+    state._additionalInfoModalVisible = false;
+
+    /**
+   * Fix focus restoration to body with Chrome
+   */
+    focus(globalObj._dom._aimFocusSpan, true);
+
+    removeClass(globalObj._dom._htmlDom, TOGGLE_ADDITIONAL_INFO_MODAL_CLASS);
+    setAttribute(globalObj._dom._aim, ARIA_HIDDEN, 'true');
+
+    /**
+   * If consent modal is visible, focus him (instead of page document)
+   */
+    if (state._consentModalVisible) {
+        focus(state._lastFocusedModalElement);
+        state._lastFocusedModalElement = null;
+    } else {
+    /**
+     * Restore focus to last page element which had focus before modal opening
+     */
+        focus(state._lastFocusedElemBeforeModal);
+        state._lastFocusedElemBeforeModal = null;
+    }
+
+    debug('CookieConsent [TOGGLE]: hide additionalInfoModal');
+};
+
 var miniAPI = {
     show,
     hide,
     showPreferences,
     showAdditionalInfo,
     hidePreferences,
+    hideAdditionalInfo,
     acceptCategory,
 };
 

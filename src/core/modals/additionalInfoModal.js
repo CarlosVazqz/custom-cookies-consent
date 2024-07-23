@@ -44,6 +44,7 @@ import {
 export const createAdditionalInfoModal = (api, createMainContainer) => {
     const state = globalObj._state;
     const dom = globalObj._dom;
+    const { hideAdditionalInfo } = api;
 
     /**
    * @type {import("../global").AdditionalInfoModalOptions}
@@ -67,6 +68,9 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         addClass(aimOverlay, 'aim-overlay');
         appendChild(dom._aimContainer, aimOverlay);
 
+        // hide modal on overlay click
+        addEvent(aimOverlay, CLICK_EVENT, hideAdditionalInfo);
+
         // Create modal
         dom._aim = createNode(DIV_TAG);
         addClass(dom._aim, 'aim');
@@ -74,6 +78,16 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         setAttribute(dom._aim, ARIA_HIDDEN, true);
         setAttribute(dom._aim, 'aria-modal', true);
         setAttribute(dom._aim, 'aria-labelledby', 'aim__title');
+
+        // Hide modal on escape key press
+        addEvent(
+            dom._htmlDom,
+            'keydown',
+            (event) => {
+                if (event.keyCode === 27) hideAdditionalInfo();
+            },
+            true
+        );
 
         // Create modal header
         dom._aimHeader = createNode(DIV_TAG);
@@ -88,6 +102,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._aimCloseBtn = createNode(BUTTON_TAG);
         addClassAim(dom._aimCloseBtn, 'close-btn');
         setAttribute(dom._aimCloseBtn, 'aria-label', closeBtnData.ariaLabel || '');
+        addEvent(dom._aimCloseBtn, CLICK_EVENT, hideAdditionalInfo);
 
         // Create close button icon
         dom._aimFocusSpan = createNode('span');
@@ -145,6 +160,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         }
 
         dom._aimFooterCloseBtn.innerHTML = closeBtnData;
+        addEvent(dom._aimFooterCloseBtn, CLICK_EVENT, hideAdditionalInfo);
     }
 
     // if (dom._aimNewBody) {
