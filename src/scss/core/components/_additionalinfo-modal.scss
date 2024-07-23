@@ -548,6 +548,7 @@ $service-toggle-knob-icon-width: 1.7px;
         display: flex;
         justify-content: space-between;
         border-top: 1px solid var(--cc-separator-border-color);
+        direction: rtl;
     }
 
     .aim__btn-group{

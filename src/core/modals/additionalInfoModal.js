@@ -140,6 +140,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         if (!dom._aimFooterCloseBtn) {
             dom._aimFooterCloseBtn = createNode(BUTTON_TAG);
             addClassAim(dom._aimFooterCloseBtn, 'btn');
+            addClassAim(dom._aimFooterCloseBtn, 'btn--secondary');
             appendChild(_aimBtnGroup, dom._aimFooterCloseBtn);
         }
 
