@@ -129,7 +129,7 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
 
     if (descriptionData) {
         const descriptionDiv = createNode(DIV_TAG);
-        descriptionDiv.addClass('aim-description');
+        addClass(descriptionDiv, 'aim-description');
         appendChild(dom._aimBody, descriptionDiv);
         dom._aimBody.innerHTML = descriptionData;
     }
@@ -140,10 +140,10 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         // const data = JSON.stringify(response);
         const data = JSON.parse(JSON.stringify(response[1]));
         const projectInfo = createNode(DIV_TAG);
-        projectInfo.addClass('project-info');
+        addClass(projectInfo, 'project-info');
 
         const projectNameDiv = createNode(DIV_TAG);
-        projectNameDiv.addClass('project-name');
+        addClass(projectNameDiv, 'project-name');
 
         const nameSpan = createNode('span');
         nameSpan.innerHTML = 'Project Name: ';
