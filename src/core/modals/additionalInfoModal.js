@@ -135,13 +135,13 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
     const getAdditionalInfoData = async () => {
         const response = await getAdditionalInfo();
         // const data = JSON.stringify(response);
-        const data = JSON.stringify(response[0], null, 2);
+        const data = JSON.parse(JSON.stringify(response[0]));
         const extraInfoDiv = createNode(DIV_TAG);
         extraInfoDiv.innerHTML = data;
         appendChild(dom._aimBody, extraInfoDiv);
     };
 
-    getAdditionalInfoData().then();
+    getAdditionalInfoData();
 
     if (closeBtnData) {
         if (!dom._aimFooterCloseBtn) {
