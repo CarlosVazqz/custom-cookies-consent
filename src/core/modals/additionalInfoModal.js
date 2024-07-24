@@ -134,7 +134,8 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
     // TODO: Add information from de API and the QR code
     const getAdditionalInfoData = async () => {
         const response = await getAdditionalInfo();
-        const data = JSON.stringify(response);
+        // const data = JSON.stringify(response);
+        const data = JSON.stringify(response[0], null, 2);
         const extraInfoDiv = createNode(DIV_TAG);
         extraInfoDiv.innerHTML = data;
         appendChild(dom._aimBody, extraInfoDiv);
