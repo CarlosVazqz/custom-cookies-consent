@@ -2,34 +2,21 @@ import { globalObj } from '../global';
 import {
     createNode,
     addClass,
-    addClassPm,
     addClassAim,
     setAttribute,
-    removeClass,
     addEvent,
     appendChild,
-    getKeys,
-    hasClass,
-    elContains,
-    getModalFocusableData,
-    isString,
-    isObject,
-    fireEvent,
     getSvgIcon,
     handleFocusTrap,
-    debug,
 } from '../../utils/general';
 
 import { guiManager } from '../../utils/gui-manager';
 import {
-    PREFERENCES_MODAL_NAME,
-    SCRIPT_TAG_SELECTOR,
     DIV_TAG,
     ARIA_HIDDEN,
     BUTTON_TAG,
     BTN_GROUP_CLASS,
     CLICK_EVENT,
-    DATA_ROLE,
 } from '../../utils/constants';
 
 /**
@@ -37,11 +24,11 @@ import {
  */
 
 /**
- * Generates preferences modal and appends it to "cc-main" el.
+ * Generates additional info modal and appends it to "cc-main" el.
  * @param {import("../global").Api} api
  * @param {CreateMainContainer} createMainContainer
  */
-export const createAdditionalInfoModal = (api, createMainContainer) => {
+export const createAdditionalInfoModal = async (api, createMainContainer) => {
     const state = globalObj._state;
     const dom = globalObj._dom;
     const { hideAdditionalInfo } = api;
@@ -116,9 +103,6 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._aimFooter = createNode(DIV_TAG);
         addClassAim(dom._aimFooter, 'footer');
 
-        // var _aimBtnContainer = createNode(DIV_TAG);
-        // addClass(_aimBtnContainer, "btns");
-
         var _aimBtnGroup = createNode(DIV_TAG);
         addClassAim(_aimBtnGroup, BTN_GROUP_CLASS);
 
@@ -137,10 +121,6 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
         appendChild(dom._aimContainer, dom._aim);
     }
-    // else {
-    //     dom._aimNewBody = createNode(DIV_TAG);
-    //     addClass(dom._aimNewBody, 'body');
-    // }
 
     if (titleData) {
         dom._aimTitle.innerHTML = titleData;
@@ -149,6 +129,14 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
     if (descriptionData) {
         dom._aimBody.innerHTML = descriptionData;
+    }
+
+    // TODO: Add information from de API and the QR code
+    const projectData = await getAdditionalInfo();
+    if (projectData) {
+        const projectInfo = createNode(DIV_TAG);
+        projectInfo.innerHTML = projectData.projectInfo;
+        appendChild(dom._aimBody, projectInfo);
     }
 
     if (closeBtnData) {
@@ -162,11 +150,6 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._aimFooterCloseBtn.innerHTML = closeBtnData;
         addEvent(dom._aimFooterCloseBtn, CLICK_EVENT, hideAdditionalInfo);
     }
-
-    // if (dom._aimNewBody) {
-    //     dom._aim.replaceChild(dom._aimNewBody, dom._aimBody);
-    //     dom._aimBody = dom._aimNewBody;
-    // }
 
     guiManager(2);
 
@@ -184,3 +167,11 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         setTimeout(() => addClass(dom._aimContainer, 'cc--anim'), 100);
     }
 };
+
+async function getAdditionalInfo() {
+    const url =
+    'https://669fa568b132e2c136fe9aba.mockapi.io/api/project-info/project-info';
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
