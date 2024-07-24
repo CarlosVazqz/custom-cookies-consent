@@ -54,19 +54,24 @@ $service-toggle-knob-icon-width: 1.7px;
         width: 100%;
     }
 
-    .project-info{
+    .project-info,
+    .project-manager,
+    .project-developer{
         display: flex;
-        font-size: 12px;
-        background-color: lightgreen;
         margin-bottom: 1em;
+        padding: 1em 0;
     }
 
-    .project-name__label{
+    .project-name__label,
+    .project-manager__label,
+    .project-developer__label{
         font-weight: bold;
-        padding: 0.5em;
+        color: darkblue;
     }
 
-    .project-name__value{
+    .project-name__value,
+    .project-manager__value,
+    .project-developer__value{
         padding: 0.5em;
         color: gray;
     }

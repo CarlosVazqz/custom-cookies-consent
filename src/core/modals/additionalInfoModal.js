@@ -130,8 +130,8 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
     if (descriptionData) {
         const descriptionDiv = createNode(DIV_TAG);
         addClass(descriptionDiv, 'aim-description');
+        descriptionDiv.innerHTML = descriptionData;
         appendChild(dom._aimBody, descriptionDiv);
-        dom._aimBody.innerHTML = descriptionData;
     }
 
     // TODO: Add information from de API and the QR code
@@ -142,6 +142,7 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         const projectInfo = createNode(DIV_TAG);
         addClass(projectInfo, 'project-info');
 
+        // Project Name
         const projectNameDiv = createNode(DIV_TAG);
         addClass(projectNameDiv, 'project-name');
 
@@ -155,8 +156,40 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
 
         appendChild(projectNameDiv, nameSpan);
         appendChild(projectNameDiv, nameValue);
-        // projectInfo.innerHTML = data;
         appendChild(projectInfo, projectNameDiv);
+
+        // Project Manager
+        const projectManagerDiv = createNode(DIV_TAG);
+        addClass(projectManagerDiv, 'project-manager');
+
+        const managerSpan = createNode('span');
+        managerSpan.innerHTML = 'Project Manager: ';
+        addClass(managerSpan, 'project-manager__label');
+
+        const managerValue = createNode('span');
+        addClass(managerValue, 'project-manager__value');
+        managerValue.innerHTML = data.project_manager;
+
+        appendChild(projectManagerDiv, managerSpan);
+        appendChild(projectManagerDiv, managerValue);
+        appendChild(projectInfo, projectManagerDiv);
+
+        // Project Developer
+        const projectDeveloperDiv = createNode(DIV_TAG);
+        addClass(projectDeveloperDiv, 'project-developer');
+
+        const developerSpan = createNode('span');
+        developerSpan.innerHTML = 'Project Developer: ';
+        addClass(developerSpan, 'project-developer__label');
+
+        const developerValue = createNode('span');
+        addClass(developerValue, 'project-developer__value');
+        developerValue.innerHTML = data.developer;
+
+        appendChild(projectDeveloperDiv, developerSpan);
+        appendChild(projectDeveloperDiv, developerValue);
+        appendChild(projectInfo, projectDeveloperDiv);
+
         appendChild(dom._aimBody, projectInfo);
     };
 
