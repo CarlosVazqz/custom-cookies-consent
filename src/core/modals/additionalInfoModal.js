@@ -135,7 +135,7 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
     const projectData = await getAdditionalInfo();
     if (projectData) {
         const projectInfo = createNode(DIV_TAG);
-        projectInfo.innerHTML = projectData.projectInfo;
+        projectInfo.innerHTML = projectData.projectInfo[0].company;
         appendChild(dom._aimBody, projectInfo);
     }
 
