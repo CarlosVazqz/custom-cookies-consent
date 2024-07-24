@@ -86,8 +86,21 @@ $service-toggle-knob-icon-width: 1.7px;
     .qr-code {
         display: block;
         padding: 1em 0;
-        background-color: #59595d;
         text-align: center;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+
+        .qr-code__description{
+            display: block;
+            padding: 15px 0;
+        }
+
+        .qr-code__img-container{
+            display: block;
+            padding: 15px auto;
+            background-color: lightcoral;
+        }
     }
 
     .aim__header{
