@@ -49,6 +49,28 @@ $service-toggle-knob-icon-width: 1.7px;
         padding: $padding-y $padding-x;
     }
 
+    .aim-description{
+        display: block;
+        width: 100%;
+    }
+
+    .project-info{
+        display: flex;
+        font-size: 12px;
+        background-color: lightgreen;
+        margin-bottom: 1em;
+    }
+
+    .project-name__label{
+        font-weight: bold;
+        padding: 0.5em;
+    }
+
+    .project-name__value{
+        padding: 0.5em;
+        color: gray;
+    }
+
     .aim__header{
         display: flex;
         justify-content: space-between;

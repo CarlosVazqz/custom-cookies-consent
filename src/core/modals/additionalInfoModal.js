@@ -128,6 +128,9 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
     }
 
     if (descriptionData) {
+        const descriptionDiv = createNode(DIV_TAG);
+        descriptionDiv.addClass('aim-description');
+        appendChild(dom._aimBody, descriptionDiv);
         dom._aimBody.innerHTML = descriptionData;
     }
 
@@ -135,10 +138,26 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
     const getAdditionalInfoData = async () => {
         const response = await getAdditionalInfo();
         // const data = JSON.stringify(response);
-        const data = JSON.parse(JSON.stringify(response[0]));
-        const extraInfoDiv = createNode(DIV_TAG);
-        extraInfoDiv.innerHTML = data;
-        appendChild(dom._aimBody, extraInfoDiv);
+        const data = JSON.parse(JSON.stringify(response[1]));
+        const projectInfo = createNode(DIV_TAG);
+        projectInfo.addClass('project-info');
+
+        const projectNameDiv = createNode(DIV_TAG);
+        projectNameDiv.addClass('project-name');
+
+        const nameSpan = createNode('span');
+        nameSpan.innerHTML = 'Project Name: ';
+        addClass(nameSpan, 'project-name__label');
+
+        const nameValue = createNode('span');
+        addClass(nameValue, 'project-name__value');
+        nameValue.innerHTML = data.company;
+
+        appendChild(projectNameDiv, nameSpan);
+        appendChild(projectNameDiv, nameValue);
+        // projectInfo.innerHTML = data;
+        appendChild(projectInfo, projectNameDiv);
+        appendChild(dom._aimBody, projectInfo);
     };
 
     getAdditionalInfoData();
