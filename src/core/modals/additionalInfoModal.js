@@ -190,6 +190,24 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         appendChild(projectDeveloperDiv, developerValue);
         appendChild(projectInfo, projectDeveloperDiv);
 
+        // Div to show the QR code
+        const qrDiv = createNode(DIV_TAG);
+        addClass(qrDiv, 'qr-code');
+
+        const qrDescription = createNode('p');
+        addClass(qrDescription, 'qr-code__description');
+        qrDescription.innerHTML =
+      'Scan the QR code to get more information about the project';
+
+        const qrImg = createNode('img');
+        addClass(qrImg, 'qr-code__img');
+        setAttribute(qrImg, 'src', data.qr_code);
+        setAttribute(qrImg, 'alt', 'QR Code');
+
+        appendChild(qrDiv, qrDescription);
+        appendChild(qrDiv, qrImg);
+        appendChild(projectInfo, qrDiv);
+
         appendChild(dom._aimBody, projectInfo);
     };
 

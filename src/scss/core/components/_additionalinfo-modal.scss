@@ -55,8 +55,7 @@ $service-toggle-knob-icon-width: 1.7px;
     }
 
     .project-info{
-        display: flex;
-        margin-bottom: 1em;
+        display: block;
         padding: 1em 0;
     }
 
@@ -65,20 +64,30 @@ $service-toggle-knob-icon-width: 1.7px;
     .project-developer{
         display: inline-block;
         width: 100%;
+        padding: 6px 0;
     }
 
     .project-name__label,
     .project-manager__label,
     .project-developer__label{
         font-weight: bold;
-        color: darkblue;
+        color: #59595d;
     }
 
     .project-name__value,
     .project-manager__value,
     .project-developer__value{
-        padding: 0.5em;
-        color: rgb(84, 81, 81);
+        color: #545151;
+        padding: 2px 12px;
+        background-color: #e9e9e9;
+        border-radius: 20px;
+    }
+
+    .qr-code {
+        display: block;
+        padding: 1em 0;
+        background-color: #59595d;
+        text-align: center;
     }
 
     .aim__header{
