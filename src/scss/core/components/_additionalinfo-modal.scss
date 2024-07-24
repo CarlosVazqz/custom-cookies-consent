@@ -54,12 +54,17 @@ $service-toggle-knob-icon-width: 1.7px;
         width: 100%;
     }
 
-    .project-info,
-    .project-manager,
-    .project-developer{
+    .project-info{
         display: flex;
         margin-bottom: 1em;
         padding: 1em 0;
+    }
+
+    .project-name,
+    .project-manager,
+    .project-developer{
+        display: inline-block;
+        width: 100%;
     }
 
     .project-name__label,
@@ -73,7 +78,7 @@ $service-toggle-knob-icon-width: 1.7px;
     .project-manager__value,
     .project-developer__value{
         padding: 0.5em;
-        color: gray;
+        color: rgb(84, 81, 81);
     }
 
     .aim__header{
