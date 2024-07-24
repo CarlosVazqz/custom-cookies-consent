@@ -132,12 +132,15 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
     }
 
     // TODO: Add information from de API and the QR code
-    const projectData = await getAdditionalInfo();
-    if (projectData) {
-        const projectInfo = createNode(DIV_TAG);
-        projectInfo.innerHTML = projectData.projectInfo[0].company;
-        appendChild(dom._aimBody, projectInfo);
-    }
+    const getAdditionalInfoData = async () => {
+        const response = await getAdditionalInfo();
+        const data = JSON.stringify(response);
+        const extraInfoDiv = createNode(DIV_TAG);
+        extraInfoDiv.innerHTML = data;
+        appendChild(dom._aimBody, extraInfoDiv);
+    };
+
+    getAdditionalInfoData().then();
 
     if (closeBtnData) {
         if (!dom._aimFooterCloseBtn) {
