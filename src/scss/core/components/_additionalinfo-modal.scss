@@ -99,6 +99,11 @@ $service-toggle-knob-icon-width: 1.7px;
         .qr-code__img-container{
             display: block;
             min-height: 190px;
+
+            .qr-code__img{
+                border: 1px solid #4e4d54;
+                border-radius: 8px;
+            }
         }
     }
 
