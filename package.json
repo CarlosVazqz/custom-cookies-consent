@@ -59,5 +59,8 @@
         "transform": {
             "\\.[jt]sx?$": "babel-jest"
         }
+    },
+    "dependencies": {
+        "qrcode": "^1.5.3"
     }
 }

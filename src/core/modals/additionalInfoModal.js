@@ -18,6 +18,7 @@ import {
     BTN_GROUP_CLASS,
     CLICK_EVENT,
 } from '../../utils/constants';
+import QRCode from 'qrcode';
 
 /**
  * @callback CreateMainContainer
@@ -202,6 +203,16 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         const qrImageContainer = createNode(DIV_TAG);
         addClass(qrImageContainer, 'qr-code__img-container');
 
+        const targetUrl =
+      'https://github.com/orestbida/cookieconsent?tab=readme-ov-file';
+        generateQR(targetUrl).then((url) => {
+            const qrImage = createNode('img');
+            setAttribute(qrImage, 'src', url);
+            setAttribute(qrImage, 'alt', 'QR code');
+            addClass(qrImage, 'qr-code__img');
+            appendChild(qrImageContainer, qrImage);
+        });
+
         appendChild(qrDiv, qrDescription);
         appendChild(qrDiv, qrImageContainer);
 
@@ -247,3 +258,11 @@ async function getAdditionalInfo() {
     const data = await response.json();
     return data;
 }
+
+const generateQR = async (text) => {
+    try {
+        return await QRCode.toDataURL(text);
+    } catch (err) {
+        console.error(err);
+    }
+};

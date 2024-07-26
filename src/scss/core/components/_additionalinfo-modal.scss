@@ -98,8 +98,7 @@ $service-toggle-knob-icon-width: 1.7px;
 
         .qr-code__img-container{
             display: block;
-            padding: 15px auto;
-            background-color: lightcoral;
+            min-height: 190px;
         }
     }
 
