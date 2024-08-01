@@ -242,7 +242,7 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         });
 
         // Add tooltip to the QR code
-        addEvent('mouseover', () => {
+        addEvent(qrDiv, 'mouseover', () => {
             const tooltip = createNode('span');
             addClass(tooltip, 'tooltip');
             tooltip.innerHTML = JSON.stringify(fulldata);
