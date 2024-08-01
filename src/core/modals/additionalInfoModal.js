@@ -135,11 +135,12 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         appendChild(dom._aimBody, descriptionDiv);
     }
 
-    // TODO: Add information from de API and the QR code
+    // Add information from de API and the QR code
     const getAdditionalInfoData = async () => {
         const response = await getAdditionalInfo();
         // const data = JSON.stringify(response);
-        const data = JSON.parse(JSON.stringify(response[1]));
+        const fulldata = JSON.parse(JSON.stringify(response));
+        const data = fulldata.projectData;
         const projectInfo = createNode(DIV_TAG);
         addClass(projectInfo, 'project-info');
 
@@ -190,6 +191,35 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         appendChild(projectDeveloperDiv, developerSpan);
         appendChild(projectDeveloperDiv, developerValue);
         appendChild(projectInfo, projectDeveloperDiv);
+
+        // show the users
+        const users = fulldata.usersData;
+        const usersDiv = createNode(DIV_TAG);
+        addClass(usersDiv, 'users');
+
+        const usersTitle = createNode('h3');
+        addClass(usersTitle, 'users__title');
+        usersTitle.innerHTML = 'Users';
+
+        appendChild(usersDiv, usersTitle);
+
+        const usersList = createNode('ul');
+        addClass(usersList, 'users__list');
+
+        users.forEach((user) => {
+            const userItem = createNode('li');
+            addClass(userItem, 'users__item');
+
+            const userSpan = createNode('span');
+            addClass(userSpan, 'users__item-name');
+            userSpan.innerHTML = user.name;
+
+            appendChild(userItem, userSpan);
+            appendChild(usersList, userItem);
+        });
+
+        appendChild(usersDiv, usersList);
+        appendChild(projectInfo, usersDiv);
 
         // Div to show the QR code
         const qrDiv = createNode(DIV_TAG);
@@ -252,9 +282,10 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
 };
 
 async function getAdditionalInfo() {
-    const urlProjectInfo =
-    'https://669fa568b132e2c136fe9aba.mockapi.io/api/project-info/project-info';
-    const urlUsers = urlProjectInfo + '/users';
+    const baseUrl =
+    'https://669fa568b132e2c136fe9aba.mockapi.io/api/project-info';
+    const urlProjectInfo = baseUrl + '/project-info';
+    const urlUsers = baseUrl + '/users';
 
     const projectResponse = await fetch(urlProjectInfo);
     const projectData = await projectResponse.json();
@@ -262,7 +293,10 @@ async function getAdditionalInfo() {
     const usersResponse = await fetch(urlUsers);
     const usersData = await usersResponse.json();
 
-    return projectData;
+    return {
+        projectData: projectData[1],
+        usersData,
+    };
 }
 
 const generateQR = async (text) => {
