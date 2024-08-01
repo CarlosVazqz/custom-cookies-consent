@@ -233,9 +233,7 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         const qrImageContainer = createNode(DIV_TAG);
         addClass(qrImageContainer, 'qr-code__img-container');
 
-        const targetUrl =
-      'https://github.com/orestbida/cookieconsent?tab=readme-ov-file';
-        generateQR(targetUrl).then((url) => {
+        generateQR(JSON.stringify(fulldata)).then((url) => {
             const qrImage = createNode('img');
             setAttribute(qrImage, 'src', url);
             setAttribute(qrImage, 'alt', 'QR code');
