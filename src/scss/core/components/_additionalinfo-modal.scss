@@ -67,6 +67,15 @@ $service-toggle-knob-icon-width: 1.7px;
         padding: 6px 0;
     }
 
+    .users__title{
+        display: block;
+        padding: 1em 0;
+    }
+    
+    .qr-code__img{
+        height: 300px;
+    }
+
     .project-name__label,
     .project-manager__label,
     .project-developer__label{
