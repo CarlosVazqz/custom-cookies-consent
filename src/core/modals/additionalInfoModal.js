@@ -245,8 +245,15 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
         addEvent(qrDiv, 'mouseover', () => {
             const tooltip = createNode('span');
             addClass(tooltip, 'tooltip');
-            tooltip.innerHTML = JSON.stringify(fulldata);
+            tooltip.innerText = JSON.stringify(fulldata);
             appendChild(qrDiv, tooltip);
+        });
+
+        addEvent(qrDiv, 'mouseout', () => {
+            const tooltip = document.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.remove();
+            }
         });
 
         appendChild(qrDiv, qrDescription);
