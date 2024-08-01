@@ -252,11 +252,17 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
 };
 
 async function getAdditionalInfo() {
-    const url =
+    const urlProjectInfo =
     'https://669fa568b132e2c136fe9aba.mockapi.io/api/project-info/project-info';
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    const urlUsers = urlProjectInfo + '/users';
+
+    const projectResponse = await fetch(urlProjectInfo);
+    const projectData = await projectResponse.json();
+
+    const usersResponse = await fetch(urlUsers);
+    const usersData = await usersResponse.json();
+
+    return projectData;
 }
 
 const generateQR = async (text) => {
