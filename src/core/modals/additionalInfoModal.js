@@ -237,23 +237,9 @@ export const createAdditionalInfoModal = async (api, createMainContainer) => {
             const qrImage = createNode('img');
             setAttribute(qrImage, 'src', url);
             setAttribute(qrImage, 'alt', 'QR code');
+            setAttribute(qrImage, 'title', JSON.stringify(fulldata));
             addClass(qrImage, 'qr-code__img');
             appendChild(qrImageContainer, qrImage);
-        });
-
-        // Add tooltip to the QR code
-        addEvent(qrDiv, 'mouseover', () => {
-            const tooltip = createNode('span');
-            addClass(tooltip, 'tooltip');
-            tooltip.innerText = JSON.stringify(fulldata);
-            appendChild(qrDiv, tooltip);
-        });
-
-        addEvent(qrDiv, 'mouseout', () => {
-            const tooltip = document.querySelector('.tooltip');
-            if (tooltip) {
-                tooltip.remove();
-            }
         });
 
         appendChild(qrDiv, qrDescription);
